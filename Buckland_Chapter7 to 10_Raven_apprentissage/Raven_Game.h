@@ -100,11 +100,13 @@ private:
 
   bool m_estEntraine;
 
+  bool m_bHavePlayer;
+
 
   
 public:
   
-  Raven_Game();
+  Raven_Game(bool isHuman);
   ~Raven_Game();
 
   //the usual suspects

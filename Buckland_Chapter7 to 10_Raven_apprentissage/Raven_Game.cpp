@@ -44,7 +44,7 @@
 
 //----------------------------- ctor ------------------------------------------
 //-----------------------------------------------------------------------------
-Raven_Game::Raven_Game():m_pSelectedBot(NULL),
+Raven_Game::Raven_Game(bool havePlayer):m_pSelectedBot(NULL),
                          m_bPaused(false),
                          m_bRemoveABot(false),
                          m_pMap(NULL),
@@ -59,6 +59,8 @@ Raven_Game::Raven_Game():m_pSelectedBot(NULL),
   m_TrainingSet = CData();
 
   m_LancerApprentissage = false;
+
+  m_bHavePlayer = havePlayer;
 }
 
 
@@ -500,6 +502,11 @@ bool Raven_Game::LoadMap(const std::string& filename)
   if (m_pMap->LoadMap(filename))
   { 
     AddBots(script->GetInt("NumBots"), false);
+
+    if (m_bHavePlayer) {
+        AddPlayer();
+        m_Bots.front() = m_Player;
+    }
   
     return true;
   }
