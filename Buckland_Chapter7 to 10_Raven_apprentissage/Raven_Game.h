@@ -49,6 +49,8 @@ private:
   //the user may select a bot to control manually. This is a pointer to that
   //bot
   Raven_Bot*                       m_pSelectedBot;
+  //Player
+  Raven_Bot* m_Player;
   
   //this list contains any active projectiles (slugs, rockets,
   //shotgun pellets, etc)
@@ -113,6 +115,7 @@ public:
   bool LoadMap(const std::string& FileName); 
 
   void AddBots(unsigned int NumBotsToAdd, bool typeBot);
+  void AddPlayer();
   void AddRocket(Raven_Bot* shooter, Vector2D target);
   void AddRailGunSlug(Raven_Bot* shooter, Vector2D target);
   void AddShotGunPellet(Raven_Bot* shooter, Vector2D target);

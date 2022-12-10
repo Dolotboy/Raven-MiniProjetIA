@@ -277,6 +277,9 @@
     <ClCompile Include="LearningBot.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="armory\Raven_Weapon.h">
@@ -618,6 +621,7 @@
     <ClInclude Include="CData.h" />
     <ClInclude Include="CNeuralNet.h" />
     <ClInclude Include="LearningBot.h" />
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="note.txt">

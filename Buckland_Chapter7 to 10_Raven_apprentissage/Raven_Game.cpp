@@ -32,6 +32,9 @@
 
 #include <thread> // pour la fonction d'apprentissage
 
+#include "Player.h"
+#include "Player.cpp"
+
 
 
 
@@ -334,6 +337,19 @@ void Raven_Game::AddBots(unsigned int NumBotsToAdd, bool isLearningBot)
 		debug_con << "Adding bot with ID " << ttos(rb->ID()) << "";
 #endif
 	}
+}
+
+//-------------------------- AddPlayer --------------------------------------
+//
+//  Adds a player
+//-----------------------------------------------------------------------------
+void Raven_Game::AddPlayer()
+{
+    Player* player = new Player(this, Vector2D());
+    
+    m_Bots.push_back(player);
+    m_Player = player;
+    EntityMgr->RegisterEntity(player);
 }
 
 //---------------------------- NotifyAllBotsOfRemoval -------------------------
