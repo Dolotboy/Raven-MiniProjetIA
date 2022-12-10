@@ -33,7 +33,6 @@
 #include <thread> // pour la fonction d'apprentissage
 
 #include "Player.h"
-#include "Player.cpp"
 
 
 
@@ -42,6 +41,24 @@
 //#define  LOG_CREATIONAL_STUFF
 
 
+//----------------------------- ctor ------------------------------------------
+//-----------------------------------------------------------------------------
+Raven_Game::Raven_Game() :m_pSelectedBot(NULL),
+                        m_bPaused(false),
+                        m_bRemoveABot(false),
+                        m_pMap(NULL),
+                        m_pPathManager(NULL),
+                        m_pGraveMarkers(NULL)
+{
+    //load in the default map
+    LoadMap(script->GetString("StartMap"));
+
+    // chaque début d'un nouveau jeu. ré-initilisaliser le dataset d'entrainement
+
+    m_TrainingSet = CData();
+
+    m_LancerApprentissage = false;
+}
 //----------------------------- ctor ------------------------------------------
 //-----------------------------------------------------------------------------
 Raven_Game::Raven_Game(bool havePlayer):m_pSelectedBot(NULL),

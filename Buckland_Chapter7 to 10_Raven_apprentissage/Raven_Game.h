@@ -27,6 +27,7 @@
 #include "navigation/pathmanager.h"
 #include "CData.h"
 #include "CNeuralNet.h"
+#include "Player.h"
 
 
 class BaseGameEntity;
@@ -106,6 +107,7 @@ private:
   
 public:
   
+  Raven_Game();
   Raven_Game(bool isHuman);
   ~Raven_Game();
 
