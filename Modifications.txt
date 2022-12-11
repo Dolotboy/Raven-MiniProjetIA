@@ -4,3 +4,9 @@ Player.h
 Player.cpp
 Raven_Game.h 
 Raven_Game.cpp (AddPlayer, LoadMap)
+
+New weapon:
+Raven_WeaponSystem.cpp (Switch)
+Raven_ObjectEnumaration.h (Enum)
+Grenade.h
+Grenade.cpp

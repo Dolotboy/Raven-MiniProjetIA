@@ -1,0 +1,4 @@
+Un joueur spawn, on doit faire un clic droit dessus pour en prendre le contrôle
+Pour se déplacer, il faut simplement faire un clic droit sur l'endroit de la map où on veut aller
+Si on veut ne plus en avoir le contrôle, on doit faire clic droit sur un autre personnage
+Pour prendre le contrôle d'un autre personnage, il n'y a qu'à faire clic droit

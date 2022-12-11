@@ -444,6 +444,7 @@
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='boundschecker|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
     </ClCompile>
+    <ClCompile Include="Grenade.cpp" />
     <ClCompile Include="LearningBot.cpp" />
     <ClCompile Include="lua\Raven_Scriptor.cpp">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
@@ -615,6 +616,7 @@
     <ClInclude Include="goals\Raven_Feature.h" />
     <ClInclude Include="goals\Raven_Goal_Types.h" />
     <ClInclude Include="GraveMarkers.h" />
+    <ClInclude Include="Grenade.h" />
     <ClInclude Include="LearningBot.h" />
     <ClInclude Include="lua\Raven_Scriptor.h" />
     <ClInclude Include="navigation\PathEdge.h" />
