@@ -2,6 +2,7 @@
 #include "Raven_Bot.h"
 #include "Raven_Game.h"
 
+class Raven_Game;
 
 class Player : public Raven_Bot
 {

@@ -95,7 +95,7 @@ LRESULT CALLBACK WindowProc (HWND   hwnd,
          ReleaseDC(hwnd, hdc);  
               
          //create the game
-         g_pRaven = new Raven_Game();
+         g_pRaven = new Raven_Game(true);
 
         //make sure the menu items are ticked/unticked accordingly
         CheckMenuItemAppropriately(hwnd, IDM_NAVIGATION_SHOW_NAVGRAPH, UserOptions->m_bShowGraph);

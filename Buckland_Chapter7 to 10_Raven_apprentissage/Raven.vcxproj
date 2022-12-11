@@ -460,6 +460,7 @@
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='boundschecker|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
     </ClCompile>
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Raven_Bot.cpp">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='boundschecker|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
@@ -621,6 +622,7 @@
     <ClInclude Include="navigation\Raven_PathPlanner.h" />
     <ClInclude Include="navigation\SearchTerminationPolicies.h" />
     <ClInclude Include="navigation\TimeSlicedGraphAlgorithms.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Raven_Bot.h" />
     <ClInclude Include="Raven_Door.h" />
     <ClInclude Include="Raven_Game.h" />

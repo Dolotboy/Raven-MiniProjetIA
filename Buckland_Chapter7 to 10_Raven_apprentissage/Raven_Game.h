@@ -27,6 +27,7 @@
 #include "navigation/pathmanager.h"
 #include "CData.h"
 #include "CNeuralNet.h"
+#include "Player.h"
 
 
 class BaseGameEntity;
@@ -49,6 +50,8 @@ private:
   //the user may select a bot to control manually. This is a pointer to that
   //bot
   Raven_Bot*                       m_pSelectedBot;
+  //Player
+  Raven_Bot* m_Player;
   
   //this list contains any active projectiles (slugs, rockets,
   //shotgun pellets, etc)
@@ -98,11 +101,14 @@ private:
 
   bool m_estEntraine;
 
+  bool m_bHavePlayer;
+
 
   
 public:
   
   Raven_Game();
+  Raven_Game(bool isHuman);
   ~Raven_Game();
 
   //the usual suspects
@@ -113,6 +119,7 @@ public:
   bool LoadMap(const std::string& FileName); 
 
   void AddBots(unsigned int NumBotsToAdd, bool typeBot);
+  void AddPlayer();
   void AddRocket(Raven_Bot* shooter, Vector2D target);
   void AddRailGunSlug(Raven_Bot* shooter, Vector2D target);
   void AddShotGunPellet(Raven_Bot* shooter, Vector2D target);

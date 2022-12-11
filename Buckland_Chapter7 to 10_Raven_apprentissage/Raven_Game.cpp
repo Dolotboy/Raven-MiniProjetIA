@@ -32,6 +32,8 @@
 
 #include <thread> // pour la fonction d'apprentissage
 
+#include "Player.h"
+
 
 
 
@@ -41,7 +43,25 @@
 
 //----------------------------- ctor ------------------------------------------
 //-----------------------------------------------------------------------------
-Raven_Game::Raven_Game():m_pSelectedBot(NULL),
+Raven_Game::Raven_Game() :m_pSelectedBot(NULL),
+                        m_bPaused(false),
+                        m_bRemoveABot(false),
+                        m_pMap(NULL),
+                        m_pPathManager(NULL),
+                        m_pGraveMarkers(NULL)
+{
+    //load in the default map
+    LoadMap(script->GetString("StartMap"));
+
+    // chaque début d'un nouveau jeu. ré-initilisaliser le dataset d'entrainement
+
+    m_TrainingSet = CData();
+
+    m_LancerApprentissage = false;
+}
+//----------------------------- ctor ------------------------------------------
+//-----------------------------------------------------------------------------
+Raven_Game::Raven_Game(bool havePlayer):m_pSelectedBot(NULL),
                          m_bPaused(false),
                          m_bRemoveABot(false),
                          m_pMap(NULL),
@@ -56,6 +76,8 @@ Raven_Game::Raven_Game():m_pSelectedBot(NULL),
   m_TrainingSet = CData();
 
   m_LancerApprentissage = false;
+
+  m_bHavePlayer = havePlayer;
 }
 
 
@@ -336,6 +358,19 @@ void Raven_Game::AddBots(unsigned int NumBotsToAdd, bool isLearningBot)
 	}
 }
 
+//-------------------------- AddPlayer --------------------------------------
+//
+//  Adds a player
+//-----------------------------------------------------------------------------
+void Raven_Game::AddPlayer()
+{
+    Player* player = new Player(this, Vector2D());
+    
+    m_Bots.push_back(player);
+    m_Player = player;
+    EntityMgr->RegisterEntity(player);
+}
+
 //---------------------------- NotifyAllBotsOfRemoval -------------------------
 //
 //  when a bot is removed from the game by a user all remianing bots
@@ -484,6 +519,11 @@ bool Raven_Game::LoadMap(const std::string& filename)
   if (m_pMap->LoadMap(filename))
   { 
     AddBots(script->GetInt("NumBots"), false);
+
+    if (m_bHavePlayer) {
+        AddPlayer();
+        m_Bots.front() = m_Player;
+    }
   
     return true;
   }
