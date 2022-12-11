@@ -10,3 +10,6 @@ Raven_WeaponSystem.cpp (Switch)
 Raven_ObjectEnumaration.h (Enum)
 Grenade.h
 Grenade.cpp
+Nade.cpp
+Nade.h
+Params.lua/Params.init
