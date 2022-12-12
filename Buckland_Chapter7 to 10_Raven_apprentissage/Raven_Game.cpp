@@ -71,7 +71,10 @@ Raven_Game::Raven_Game(bool havePlayer):m_pSelectedBot(NULL),
                          m_pGraveMarkers(NULL)
 {
   //load in the default map
-  LoadMap(script->GetString("StartMap"));
+  //LoadMap(script->GetString("StartMap"));
+  //LoadMap(script->GetString("Map2"));
+    LoadMap(script->GetString("Map2Grenade"));
+
 
   // chaque début d'un nouveau jeu. ré-initilisaliser le dataset d'entrainement
 
