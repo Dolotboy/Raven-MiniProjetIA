@@ -10,6 +10,7 @@
 #include "debug/DebugConsole.h"
 #include "Raven_UserOptions.h"
 #include "Raven_Game.h"
+
 #include "lua/Raven_Scriptor.h"
 
 
@@ -155,6 +156,12 @@ LRESULT CALLBACK WindowProc (HWND   hwnd,
            g_pRaven->ChangeWeaponOfPossessedBot(type_rail_gun);
 
            break;
+
+         case '5':
+
+             g_pRaven->ChangeWeaponOfPossessedBot(type_grenade_throw);
+
+             break;
 
          case 'X':
 

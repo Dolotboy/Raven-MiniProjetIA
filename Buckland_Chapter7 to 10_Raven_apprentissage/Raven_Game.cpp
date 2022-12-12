@@ -768,6 +768,10 @@ void Raven_Game::ChangeWeaponOfPossessedBot(unsigned int weapon)const
       
       PossessedBot()->ChangeWeapon(type_rail_gun); return;
 
+    case type_grenade_throw:
+
+        PossessedBot()->ChangeWeapon(type_grenade_throw); return;
+
     }
   }
 }

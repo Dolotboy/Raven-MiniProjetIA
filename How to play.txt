@@ -1,4 +1,14 @@
 Un joueur spawn, on doit faire un clic droit dessus pour en prendre le contrôle
 Pour se déplacer, il faut simplement faire un clic droit sur l'endroit de la map où on veut aller
-Si on veut ne plus en avoir le contrôle, on doit faire clic droit sur un autre personnage
+Pour changer d'arme lorsqu'un joueur contrôle un bot, il suiffit de ramsser l'arme désiré puis d'appuyer sur 
+'1' = Blaster, 
+'2' = Shotgun,
+'3' = Rocket Launcher,
+'4' = RailGun,
+'5' = Grenade
+Pour ajouter un bot, il faut appuyer sur KEY_UP et en enlever un, appuyer sur KEY_DOWN
+
+Si on veut ne plus en avoir le contrôle, on doit faire clic droit sur un autre personnage ou bien appuyer sur 'X'
 Pour prendre le contrôle d'un autre personnage, il n'y a qu'à faire clic droit
+
+Pour mettre le jeu sur pause, il suffit de cliquer sur 'P'

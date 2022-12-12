@@ -129,7 +129,7 @@ void Grenade::Render()
         m_pOwner->Facing().Perp(),
         m_pOwner->Scale());
 
-    gdi->BluePen();
+    gdi->GreenPen(); // This is the color the gun will have in the player hands
 
-    gdi->ClosedShape(m_vecWeaponVBTrans);
+    gdi->PolyLine(m_vecWeaponVBTrans);
 }

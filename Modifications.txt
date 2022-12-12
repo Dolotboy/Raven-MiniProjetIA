@@ -14,3 +14,5 @@ Nade.cpp
 Nade.h
 Raven_Map.cpp (Switch to load the Grenade in map)
 Params.lua/Params.init
+Trigger_WeaponGiver (Display Weapon in map)
+Raven_Game.cpp
