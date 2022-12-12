@@ -7,9 +7,12 @@ Raven_Game.cpp (AddPlayer, LoadMap)
 
 New weapon:
 Raven_WeaponSystem.cpp (Switch)
-Raven_ObjectEnumaration.h (Enum)
+Raven_ObjectEnumaration.h (Enum (Message that appear in game console))
 Grenade.h
 Grenade.cpp
 Nade.cpp
 Nade.h
+Raven_Map.cpp (Switch to load the Grenade in map)
 Params.lua/Params.init
+Trigger_WeaponGiver (Display Weapon in map)
+Raven_Game.cpp

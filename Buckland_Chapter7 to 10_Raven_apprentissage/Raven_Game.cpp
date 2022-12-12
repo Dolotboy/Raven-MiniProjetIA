@@ -58,7 +58,7 @@ Raven_Game::Raven_Game() :m_pSelectedBot(NULL),
     //LoadMap(script->GetString("StartMap"));
     LoadMap(script->GetString("Map2"));
 
-    // chaque début d'un nouveau jeu. ré-initilisaliser le dataset d'entrainement
+    // chaque dï¿½but d'un nouveau jeu. rï¿½-initilisaliser le dataset d'entrainement
 
     m_TrainingSet = CData();
 
@@ -76,13 +76,19 @@ Raven_Game::Raven_Game(bool havePlayer):m_pSelectedBot(NULL),
                          m_pGraveMarkers(NULL)
 {
 
+  //load in the default map
+  //LoadMap(script->GetString("StartMap"));
+  //LoadMap(script->GetString("Map2"));
+    LoadMap(script->GetString("Map2Grenade"));
+
+
     Vector2D loot = Vector2D(60, 60);
     m_teams.push_back(new Team(loot, "Team 1", 1));
     m_teams.push_back(new Team(loot, "Team 2", 2));
     //load in the default map
     LoadMap(script->GetString("StartMap"));
 
-    // chaque début d'un nouveau jeu. ré-initilisaliser le dataset d'entrainement
+    // chaque dï¿½but d'un nouveau jeu. rï¿½-initilisaliser le dataset d'entrainement
 
     m_TrainingSet = CData();
 
@@ -232,7 +238,7 @@ void Raven_Game::Update()
       //change its status to spawning
       (*curBot)->SetSpawning();
 
-	  //de temps en temps (une fois sur 2) créer un bot apprenant, lorqu'un un bot meurt.
+	  //de temps en temps (une fois sur 2) crï¿½er un bot apprenant, lorqu'un un bot meurt.
 	  //la fonction RandBool) rend vrai une fois sur 2.
 	  if (m_estEntraine & RandBool()) {
           AddBotsTeam(1);
@@ -245,7 +251,7 @@ void Raven_Game::Update()
     {
       (*curBot)->Update();
 
-	  //on crée un échantillon de 200 observations. Juste assez pour ne pas s'accaparer de la mémoire...
+	  //on crï¿½e un ï¿½chantillon de 200 observations. Juste assez pour ne pas s'accaparer de la mï¿½moire...
 	  if ((m_TrainingSet.GetInputSet().size() < 200) & ((*curBot)->Score() > 1))  {
 
 		  //ajouter une observation au jeu d'entrainement
@@ -276,8 +282,8 @@ void Raven_Game::Update()
   }
 
 
-  //Lancer l'apprentissage quand le jeu de données est suffisant
-  //la fonction d'apprentissage s'effectue en parallèle : thread
+  //Lancer l'apprentissage quand le jeu de donnï¿½es est suffisant
+  //la fonction d'apprentissage s'effectue en parallï¿½le : thread
 
   if ((m_TrainingSet.GetInputSet().size() >= 200) & (!m_LancerApprentissage)) {
 
@@ -481,7 +487,7 @@ void Raven_Game::NotifyAllBotsOfRemoval(Raven_Bot* pRemovedBot)const
     }
 }
 
-//ajout à chaque update d'un bot des données sur son cmportement
+//ajout ï¿½ chaque update d'un bot des donnï¿½es sur son cmportement
 bool Raven_Game::AddData(vector<double>& data, vector<double>& targets)
 {
 	if (data.size() > 0 && targets.size() > 0) {
@@ -769,6 +775,10 @@ void Raven_Game::ChangeWeaponOfPossessedBot(unsigned int weapon)const
     case type_rail_gun:
       
       PossessedBot()->ChangeWeapon(type_rail_gun); return;
+
+    case type_grenade_throw:
+
+        PossessedBot()->ChangeWeapon(type_grenade_throw); return;
 
     }
   }

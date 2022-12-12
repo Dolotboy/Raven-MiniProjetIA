@@ -20,14 +20,14 @@ Nade::Nade(Raven_Bot* shooter, Vector2D target) :
         shooter->ID(),
         shooter->Pos(),
         shooter->Facing(),
-        script->GetInt("Bomb_Damage"),
-        script->GetDouble("Bomb_Scale"),
-        script->GetDouble("Bomb_MaxSpeed"),
-        script->GetDouble("Bomb_Mass"),
-        script->GetDouble("Bomb_MaxForce")),
+        script->GetInt("Nade_Damage"),
+        script->GetDouble("Nade_Scale"),
+        script->GetDouble("Nade_MaxSpeed"),
+        script->GetDouble("Nade_Mass"),
+        script->GetDouble("Nade_MaxForce")),
 
     m_dCurrentBlastRadius(0.0),
-    m_dBlastRadius(script->GetDouble("Bomb_BlastRadius"))
+    m_dBlastRadius(script->GetDouble("Nade_BlastRadius"))
 {
     assert(target != Vector2D());
 }
@@ -52,7 +52,7 @@ void Nade::Update()
 
     else
     {
-        m_dCurrentBlastRadius += script->GetDouble("Bomb_ExplosionDecayRate");
+        m_dCurrentBlastRadius += script->GetDouble("Nade_ExplosionDecayRate");
 
         //when the rendered blast circle becomes equal in size to the blast radius
         //the rocket can be removed from the game
