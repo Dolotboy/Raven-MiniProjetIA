@@ -506,6 +506,7 @@
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='boundschecker|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
     </ClCompile>
+    <ClCompile Include="Team.cpp" />
     <ClCompile Include="triggers\Trigger_HealthGiver.cpp">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='boundschecker|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
@@ -635,6 +636,7 @@
     <ClInclude Include="Raven_UserOptions.h" />
     <ClInclude Include="Raven_WeaponSystem.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Team.h" />
     <ClInclude Include="triggers\Trigger_HealthGiver.h" />
     <ClInclude Include="triggers\Trigger_OnButtonSendMsg.h" />
     <ClInclude Include="triggers\Trigger_SoundNotify.h" />

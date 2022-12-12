@@ -28,6 +28,7 @@
 #include "CData.h"
 #include "CNeuralNet.h"
 #include "Player.h"
+#include "Team.h"
 
 
 class BaseGameEntity;
@@ -72,6 +73,9 @@ private:
   GraveMarkers*                    m_pGraveMarkers;
 
 
+  std::vector<Team*>	m_teams;
+
+
 
   //this iterates through each trigger, testing each one against each bot
   void  UpdateTriggers();
@@ -82,6 +86,12 @@ private:
   //attempts to position a spawning bot at a free spawn point. returns false
   //if unsuccessful 
   bool AttemptToAddBot(Raven_Bot* pBot);
+
+
+  bool AttemptToAddBotTeam(Raven_Bot* pBot);
+
+
+  void AddSpawnPointsTeams();
 
   //when a bot is removed from the game by a user all remaining bots
   //must be notified so that they can remove any references to that bot from
@@ -119,6 +129,8 @@ public:
   bool LoadMap(const std::string& FileName); 
 
   void AddBots(unsigned int NumBotsToAdd, bool typeBot);
+  void AddBotsTeam(unsigned int NumBotsToAdd);
+  void AddBot(Raven_Bot* rb);
   void AddPlayer();
   void AddRocket(Raven_Bot* shooter, Vector2D target);
   void AddRailGunSlug(Raven_Bot* shooter, Vector2D target);
