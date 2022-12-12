@@ -12,11 +12,8 @@ private:
 public:
     FleeCuzOfStress(
         Raven_Bot* pBot,
-        int         item,
-        int         p_nbFramesBetweenChange) : Goal_GetItem(pBot, item)
+        int         item) : Goal_GetItem(pBot, item)
     {
-        m_bClockwise = RandBool();
-    FleeCuzOfStress:nbFramesBetweenChange = p_nbFramesBetweenChange;
     };
 
     void Activate() override;
