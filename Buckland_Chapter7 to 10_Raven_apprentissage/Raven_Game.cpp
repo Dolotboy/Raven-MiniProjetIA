@@ -79,7 +79,7 @@ Raven_Game::Raven_Game(bool havePlayer):m_pSelectedBot(NULL),
   //load in the default map
   //LoadMap(script->GetString("StartMap"));
   //LoadMap(script->GetString("Map2"));
-    LoadMap(script->GetString("Map2Grenade"));
+   LoadMap(script->GetString("Map2Grenade"));
 
 
     Vector2D loot = Vector2D(60, 60);
