@@ -1,0 +1,24 @@
+5
+Index: 0 PosX: 86 PosY: 150
+Index: 1 PosX: 85 PosY: 182
+Index: 2 PosX: 85 PosY: 206
+Index: 3 PosX: 84 PosY: 223
+Index: 4 PosX: 125 PosY: 250
+4
+m_iFrom: 1 m_iTo: 2 m_dCost: 24 m_iFlags: 0 ID: -1
+m_iFrom: 2 m_iTo: 1 m_dCost: 24 m_iFlags: 0 ID: -1
+m_iFrom: 2 m_iTo: 3 m_dCost: 17.0294 m_iFlags: 0 ID: -1
+m_iFrom: 3 m_iTo: 2 m_dCost: 17.0294 m_iFlags: 0 ID: -1
+
+473 454
+7 0  86 150 7  0
+7 1  85 182 7  1
+8 2  85 206 7  2
+6 3  84 223 7  3
+0  35 104  38 345  -0.999923 0.0124472
+0  240 335  38 343  -0.0395729 -0.999217
+0  239 334  448 69  0.785186 0.61926
+0  448 68  36 104  -0.087047 -0.996204
+5 8  394 92 7  -1
+5 9  60 323 7  -1
+9 10 125 250 7  -1
