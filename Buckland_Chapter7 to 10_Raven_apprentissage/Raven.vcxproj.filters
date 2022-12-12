@@ -289,6 +289,9 @@
     <ClCompile Include="armory\Nade.cpp">
       <Filter>Game\weapons &amp; projectiles\projectiles</Filter>
     </ClCompile>
+    <ClCompile Include="goals\FleeCuzOfStress.cpp">
+      <Filter>AI\goals\atomic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="armory\Raven_Weapon.h">
@@ -639,6 +642,9 @@
     </ClInclude>
     <ClInclude Include="armory\Nade.h">
       <Filter>Game\weapons &amp; projectiles\projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="goals\FleeCuzOfStress.h">
+      <Filter>AI\goals\atomic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
