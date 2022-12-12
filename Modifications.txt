@@ -1,11 +1,11 @@
-Players:
+Players: +30 PTS
 main.cpp (Raven_Game initialisation)
 Player.h
 Player.cpp
 Raven_Game.h 
 Raven_Game.cpp (AddPlayer, LoadMap)
 
-New weapon:
+New weapon: +10 PTS
 Raven_WeaponSystem.cpp (Switch)
 Raven_ObjectEnumaration.h (Enum (Message that appear in game console))
 Grenade.h
@@ -16,3 +16,16 @@ Raven_Map.cpp (Switch to load the Grenade in map)
 Params.lua/Params.init
 Trigger_WeaponGiver (Display Weapon in map)
 Raven_Game.cpp
+
+Bot Apprenant: +40 PTS
+Utilisation de l'exemple donné par le professeur
+
+Nouveau but: +10 PTS
+(Get Grenade):
+Raven_goal_Types.h
+Raven_goal_Types.cpp
+Goal_GetItem.cpp
+
+(Flee because of stress):
+FleeCuzOfStress.cpp
+FleeCuzOfStress.h
