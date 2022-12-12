@@ -169,10 +169,16 @@ LRESULT CALLBACK WindowProc (HWND   hwnd,
 
            break;
 
+         case 'T':
+
+             g_pRaven->GetPlayer()->GetTeam()->UpdateNewTarget(g_pRaven->GetSelectedBot(), g_pRaven->GetPlayer()->ID());
+             g_pRaven->GetSelectedBot()->isTargeted = true;
+             break;
+
 
          case VK_UP:
 
-           g_pRaven->AddBots(1, false); break;
+           g_pRaven->AddBotsTeam(1); break;
 
          case VK_DOWN:
 
@@ -221,7 +227,7 @@ LRESULT CALLBACK WindowProc (HWND   hwnd,
 
       case IDM_GAME_ADDBOT:
 
-          g_pRaven->AddBots(1, false);
+          g_pRaven->AddBotsTeam(1);
           
           break;
 

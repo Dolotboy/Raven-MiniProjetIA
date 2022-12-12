@@ -51,15 +51,20 @@ Raven_Game::Raven_Game() :m_pSelectedBot(NULL),
                         m_pPathManager(NULL),
                         m_pGraveMarkers(NULL)
 {
+    Vector2D loot = Vector2D(60, 60);
+    m_teams.push_back(new Team(loot, "Team 1", 1));
+    m_teams.push_back(new Team(loot, "Team 2", 2));
     //load in the default map
     //LoadMap(script->GetString("StartMap"));
     LoadMap(script->GetString("Map2"));
 
-    // chaque début d'un nouveau jeu. ré-initilisaliser le dataset d'entrainement
+    // chaque dï¿½but d'un nouveau jeu. rï¿½-initilisaliser le dataset d'entrainement
 
     m_TrainingSet = CData();
 
     m_LancerApprentissage = false;
+
+   
 }
 //----------------------------- ctor ------------------------------------------
 //-----------------------------------------------------------------------------
@@ -70,19 +75,28 @@ Raven_Game::Raven_Game(bool havePlayer):m_pSelectedBot(NULL),
                          m_pPathManager(NULL),
                          m_pGraveMarkers(NULL)
 {
+
   //load in the default map
   //LoadMap(script->GetString("StartMap"));
   //LoadMap(script->GetString("Map2"));
     LoadMap(script->GetString("Map2Grenade"));
 
 
-  // chaque début d'un nouveau jeu. ré-initilisaliser le dataset d'entrainement
+    Vector2D loot = Vector2D(60, 60);
+    m_teams.push_back(new Team(loot, "Team 1", 1));
+    m_teams.push_back(new Team(loot, "Team 2", 2));
+    //load in the default map
+    LoadMap(script->GetString("StartMap"));
 
-  m_TrainingSet = CData();
+    // chaque dï¿½but d'un nouveau jeu. rï¿½-initilisaliser le dataset d'entrainement
 
-  m_LancerApprentissage = false;
+    m_TrainingSet = CData();
 
-  m_bHavePlayer = havePlayer;
+    m_LancerApprentissage = false;
+
+    m_bHavePlayer = havePlayer;
+
+
 }
 
 
@@ -224,10 +238,10 @@ void Raven_Game::Update()
       //change its status to spawning
       (*curBot)->SetSpawning();
 
-	  //de temps en temps (une fois sur 2) créer un bot apprenant, lorqu'un un bot meurt.
+	  //de temps en temps (une fois sur 2) crï¿½er un bot apprenant, lorqu'un un bot meurt.
 	  //la fonction RandBool) rend vrai une fois sur 2.
 	  if (m_estEntraine & RandBool()) {
-		  AddBots(1, true);
+          AddBotsTeam(1);
 	  }
 
     }
@@ -237,7 +251,7 @@ void Raven_Game::Update()
     {
       (*curBot)->Update();
 
-	  //on crée un échantillon de 200 observations. Juste assez pour ne pas s'accaparer de la mémoire...
+	  //on crï¿½e un ï¿½chantillon de 200 observations. Juste assez pour ne pas s'accaparer de la mï¿½moire...
 	  if ((m_TrainingSet.GetInputSet().size() < 200) & ((*curBot)->Score() > 1))  {
 
 		  //ajouter une observation au jeu d'entrainement
@@ -268,8 +282,8 @@ void Raven_Game::Update()
   }
 
 
-  //Lancer l'apprentissage quand le jeu de données est suffisant
-  //la fonction d'apprentissage s'effectue en parallèle : thread
+  //Lancer l'apprentissage quand le jeu de donnï¿½es est suffisant
+  //la fonction d'apprentissage s'effectue en parallï¿½le : thread
 
   if ((m_TrainingSet.GetInputSet().size() >= 200) & (!m_LancerApprentissage)) {
 
@@ -407,13 +421,12 @@ void Raven_Game::AddBots(unsigned int NumBotsToAdd, bool isLearningBot)
 
 void Raven_Game::AddBotsTeam(unsigned int NumBotsToAdd)
 {
-    int currTeamId = 1;
     while (NumBotsToAdd--)
     {
         
         Raven_Bot* rb = new Raven_Bot(this, Vector2D());
-        m_teams.at(currTeamId)->Addmember(rb); 
-        rb->SetTeam(m_teams.at(currTeamId), 0); 
+        m_teams.at(g_teamIntermidiate)->Addmember(rb);
+        rb->SetTeam(m_teams.at(g_teamIntermidiate), 0);
         rb->SetBotNumber((NumBotsToAdd % 3) + 1);
 
        
@@ -423,7 +436,7 @@ void Raven_Game::AddBotsTeam(unsigned int NumBotsToAdd)
         debug_con << "Adding bot with ID " << ttos(rb->ID()) << " to team " << teams.at(currTeamId)->GetName() << "";
 #endif
         
-        currTeamId = ++currTeamId % 2;
+        g_teamIntermidiate = ++g_teamIntermidiate % 2;
     }
 }
 
@@ -446,10 +459,12 @@ void Raven_Game::AddBot(Raven_Bot* rb)
 void Raven_Game::AddPlayer()
 {
     Player* player = new Player(this, Vector2D());
-    m_teams.at(0)->Addmember(player);
+    m_teams.at(g_teamIntermidiate)->Addmember(player);
+    player->SetTeam(m_teams.at(0), 0);
     m_Bots.push_back(player);
     m_Player = player;
     EntityMgr->RegisterEntity(player);
+    g_teamIntermidiate = ++g_teamIntermidiate % 2;
 }
 
 //---------------------------- NotifyAllBotsOfRemoval -------------------------
@@ -472,7 +487,7 @@ void Raven_Game::NotifyAllBotsOfRemoval(Raven_Bot* pRemovedBot)const
     }
 }
 
-//ajout à chaque update d'un bot des données sur son cmportement
+//ajout ï¿½ chaque update d'un bot des donnï¿½es sur son cmportement
 bool Raven_Game::AddData(vector<double>& data, vector<double>& targets)
 {
 	if (data.size() > 0 && targets.size() > 0) {
@@ -611,13 +626,6 @@ bool Raven_Game::LoadMap(const std::string& filename)
   //load the new map data
   if (m_pMap->LoadMap(filename))
   { 
-
-
-    Vector2D loot = Vector2D(60, 60);
-    m_teams.push_back(new Team(loot, "Team 1"));
-    m_teams.push_back(new Team(loot, "Team 2"));
-
-
     AddSpawnPointsTeams();
     AddBotsTeam(script->GetInt("NumBots"));
     //AddBots(script->GetInt("NumBots"), false);

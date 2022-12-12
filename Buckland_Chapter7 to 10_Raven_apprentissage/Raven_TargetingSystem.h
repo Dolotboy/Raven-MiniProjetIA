@@ -51,6 +51,9 @@ public:
   //and the owner
   bool       isTargetShootable()const;
 
+  bool       isTeammate()const;
+
+
   //returns the position the target was last seen. Throws an exception if
   //there is no target currently assigned
   Vector2D   GetLastRecordedPosition()const;
@@ -66,6 +69,8 @@ public:
 
   //sets the target pointer to null
   void       ClearTarget(){m_pCurrentTarget=0;}
+
+  void		 SetTarget(Raven_Bot* Target) { m_pCurrentTarget = Target; }
 };
 
 

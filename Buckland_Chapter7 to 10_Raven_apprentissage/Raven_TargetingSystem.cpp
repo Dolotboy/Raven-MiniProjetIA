@@ -18,7 +18,7 @@ Raven_TargetingSystem::Raven_TargetingSystem(Raven_Bot* owner):m_pOwner(owner),
 void Raven_TargetingSystem::Update()
 {
   double ClosestDistSoFar = MaxDouble;
-  m_pCurrentTarget       = 0;
+  //m_pCurrentTarget       = 0;
 
   //grab a list of all the opponents the owner can sense
   std::list<Raven_Bot*> SensedBots;
@@ -28,7 +28,7 @@ void Raven_TargetingSystem::Update()
   for (curBot; curBot != SensedBots.end(); ++curBot)
   {
     //make sure the bot is alive and that it is not the owner
-    if ((*curBot)->isAlive() && (*curBot != m_pOwner) )
+    if ((*curBot)->isAlive() && (*curBot != m_pOwner))
     {
       double dist = Vec2DDistanceSq((*curBot)->Pos(), m_pOwner->Pos());
 
@@ -52,6 +52,11 @@ bool Raven_TargetingSystem::isTargetWithinFOV()const
 bool Raven_TargetingSystem::isTargetShootable()const
 {
   return m_pOwner->GetSensoryMem()->isOpponentShootable(m_pCurrentTarget);
+}
+
+bool Raven_TargetingSystem::isTeammate() const
+{
+    return m_pOwner->GetTeam() == m_pCurrentTarget->GetTeam();
 }
 
 Vector2D Raven_TargetingSystem::GetLastRecordedPosition()const

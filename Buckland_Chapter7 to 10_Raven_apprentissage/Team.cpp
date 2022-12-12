@@ -9,12 +9,13 @@ Team::Team()
 {
 }
 
-Team::Team(Vector2D lootposition, std::string name)
+Team::Team(Vector2D lootposition, std::string name, int teamId)
 {
 	members = std::list<Raven_Bot*>();
 	name_team = name;
 	lootingLocation = lootposition;
 	target = 0;
+	m_teamId = teamId;
 }
 
 void Team::UpdateNewTarget(Raven_Bot* new_target, int id_sender) {
@@ -27,7 +28,7 @@ void Team::UpdateNewTarget(Raven_Bot* new_target, int id_sender) {
 		Dispatcher->DispatchMsg(SEND_MSG_IMMEDIATELY,
 			id_sender,
 			bot_courant->ID(),
-			0,
+			Msg_UpdatingTarget,
 			NO_ADDITIONAL_INFO);
 	}
 }
@@ -42,7 +43,7 @@ void Team::ClearTarget(int id_sender) {
 		Dispatcher->DispatchMsg(SEND_MSG_IMMEDIATELY,
 			id_sender,
 			bot_courant->ID(),
-			0,
+			Msg_TargetKilled,
 			NO_ADDITIONAL_INFO);
 	}
 }
