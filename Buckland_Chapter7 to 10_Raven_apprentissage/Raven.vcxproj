@@ -287,6 +287,8 @@
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='boundschecker|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
     </ClCompile>
+    <ClCompile Include="armory\Grenade.cpp" />
+    <ClCompile Include="armory\Nade.cpp" />
     <ClCompile Include="armory\Projectile_Bolt.cpp">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='boundschecker|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
@@ -581,6 +583,8 @@
     <ClInclude Include="..\Common\Triggers\TriggerSystem.h" />
     <ClInclude Include="..\Common\Triggers\Trigger_LimitedLifeTime.h" />
     <ClInclude Include="..\Common\Triggers\Trigger_ReSpawning.h" />
+    <ClInclude Include="armory\Grenade.h" />
+    <ClInclude Include="armory\Nade.h" />
     <ClInclude Include="armory\Projectile_Bolt.h" />
     <ClInclude Include="armory\Projectile_Pellet.h" />
     <ClInclude Include="armory\Projectile_Rocket.h" />
