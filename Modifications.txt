@@ -26,6 +26,12 @@ Raven_goal_Types.h
 Raven_goal_Types.cpp
 Goal_GetItem.cpp
 
-(Flee because of stress):
+(Flee because of stress): Dans le think on ajoute un Evaluateur, cet évaluateur donne sur un Goal. Donc think vérifie dans tous les évaluateurs ce qui vaut le plus la peine.
+Une fois que l'évaluateur avec la plus grande désirabilité est trouvé, il call le SetGoal de cet évaluateur qui call un fonction de Think qui rammène vers un Goal
 FleeCuzOfStress.cpp
 FleeCuzOfStress.h
+Raven_goal_Types.h
+Raven_goal_Types.cpp
+Goal_Think.cpp
+FleeGoal_Evaluator.cpp
+FleeGoal_Evaluator.h

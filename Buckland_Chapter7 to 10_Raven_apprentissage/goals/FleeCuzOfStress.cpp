@@ -7,14 +7,13 @@
 
 // FleeCuzOfStress
 // When his HP are low there is a chance that the bot may become crazy because of stress instead of going after health item
-
 //------------------------------- Activate ------------------------------------
 //-----------------------------------------------------------------------------
 void FleeCuzOfStress::Activate() {
     m_iStatus = active;
 
     // If not fleeing, init flee
-    if (!isFleeing && m_pOwner->Health() <= 10) {
+    if (!isFleeing && m_pOwner->Health() <= 20) {
         initFlee();
         isFleeing = true;
     }
@@ -32,8 +31,8 @@ int FleeCuzOfStress::Process() {
     // Active goal if inactive
     ActivateIfInactive();
 
-    // Abort if the health is superior to 10
-    if (m_pOwner->Health() > 10)
+    // Abort if the health is superior to 20
+    if (m_pOwner->Health() > 20)
     {
         Terminate();
         m_iStatus = failed;
@@ -41,13 +40,12 @@ int FleeCuzOfStress::Process() {
     }
     else
     {
-        if (!isFleeing && m_pOwner->Health() <= 10) 
+        if (!isFleeing && m_pOwner->Health() <= 20) 
         {
-            RemoveAllSubgoals();
             initFlee();
             isFleeing = true;
         }
-        else if (isFleeing && m_pOwner->Health() > 10)
+        else if (isFleeing && m_pOwner->Health() > 20)
         {
             // The bots walked on HP and got healed
             Terminate();
@@ -73,4 +71,5 @@ void FleeCuzOfStress::Terminate() {
 void FleeCuzOfStress::initFlee() {
 
     m_pOwner->GetSteering()->WanderOn();
+    debug_con << "BOT " << m_pOwner->ID() << " IS FLEEING!!" << "";
 }

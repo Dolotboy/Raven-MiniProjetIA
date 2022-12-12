@@ -352,6 +352,7 @@
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
     </ClCompile>
     <ClCompile Include="goals\FleeCuzOfStress.cpp" />
+    <ClCompile Include="goals\FleeGoal_Evaluator.cpp" />
     <ClCompile Include="goals\GetHealthGoal_Evaluator.cpp">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='boundschecker|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
@@ -602,6 +603,7 @@
     <ClInclude Include="goals\AttackTargetGoal_Evaluator.h" />
     <ClInclude Include="goals\ExploreGoal_Evaluator.h" />
     <ClInclude Include="goals\FleeCuzOfStress.h" />
+    <ClInclude Include="goals\FleeGoal_Evaluator.h" />
     <ClInclude Include="goals\GetHealthGoal_Evaluator.h" />
     <ClInclude Include="goals\GetWeaponGoal_Evaluator.h" />
     <ClInclude Include="goals\Goal_AdjustRange.h" />
