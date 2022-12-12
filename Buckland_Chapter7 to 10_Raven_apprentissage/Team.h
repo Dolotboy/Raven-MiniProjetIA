@@ -23,9 +23,10 @@ private:
 
 
 	Vector2D				lootingLocation;
+	int						m_teamId;
 public:
 	Team();
-	Team(Vector2D lootingLocation, std::string name);
+	Team(Vector2D lootingLocation, std::string name,int teamId);
 	~Team();
 
 	std::string	GetName() { return name_team; }
@@ -42,6 +43,8 @@ public:
 	void		UpdateNewTarget(Raven_Bot* bot, int id_sender);
 	Raven_Bot*	GetTarget() { return target; }
 	void		ClearTarget(int id_sender);
+
+	int			GetTeamId(){return m_teamId;}
 
 };
 

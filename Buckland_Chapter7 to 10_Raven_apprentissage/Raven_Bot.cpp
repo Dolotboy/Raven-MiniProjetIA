@@ -267,6 +267,7 @@ bool Raven_Bot::HandleMessage(const Telegram& msg)
                               msg.Sender,
                               Msg_YouGotMeYouSOB,
                               NO_ADDITIONAL_INFO);
+      isTargeted = false;
     }
 
     return true;
@@ -302,6 +303,18 @@ bool Raven_Bot::HandleMessage(const Telegram& msg)
 
       return true;
     }
+
+  case Msg_UpdatingTarget:
+  {
+      m_pTargSys->SetTarget(current_team->GetTarget()); // modify target
+      return true;
+  }
+
+  case Msg_TargetKilled: {
+      m_pTargSys->ClearTarget(); //clear target
+      isTargeted = false;
+      return true;
+  }
 
 
   default: return false;
@@ -514,6 +527,7 @@ void Raven_Bot::Render()
 
   if (isDead() || isSpawning()) return;
   
+  
   gdi->BluePen();
   
   m_vecBotVBTrans = WorldTransform(m_vecBotVB,
@@ -525,7 +539,18 @@ void Raven_Bot::Render()
   gdi->ClosedShape(m_vecBotVBTrans);
   
   //draw the head
-  gdi->BrownBrush();
+  if (current_team) {
+      if (current_team->GetTeamId() == 1)
+        gdi->RedBrush();
+      else if (current_team->GetTeamId() == 2)
+        gdi->GreenBrush();
+  }
+  else
+      gdi->BrownBrush();
+
+  if(isTargeted)
+      gdi->OrangeBrush();
+
   gdi->Circle(Pos(), 6.0 * Scale().x);
 
 

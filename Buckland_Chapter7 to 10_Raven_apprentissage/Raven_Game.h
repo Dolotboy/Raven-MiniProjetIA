@@ -42,6 +42,8 @@ class Raven_Game
 {
 private:
 
+    int g_teamIntermidiate = 1;
+
   //the current game map
   Raven_Map*                       m_pMap;
  
@@ -203,7 +205,11 @@ public:
 
   
   void  TagRaven_BotsWithinViewRange(BaseGameEntity* pRaven_Bot, double range)
-              {TagNeighbors(pRaven_Bot, m_Bots, range);}  
+              {TagNeighbors(pRaven_Bot, m_Bots, range);} 
+
+  Raven_Bot* GetSelectedBot() {return m_pSelectedBot;}
+  Raven_Bot* GetPlayer() { return m_Player; }
+
 };
 
 

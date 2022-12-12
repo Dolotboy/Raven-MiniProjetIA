@@ -139,6 +139,8 @@ public:
   Raven_Bot(Raven_Game* world, Vector2D pos);
   virtual ~Raven_Bot();
 
+  bool isTargeted = false;
+
   //the usual suspects
   void         Render();
   virtual void         Update();

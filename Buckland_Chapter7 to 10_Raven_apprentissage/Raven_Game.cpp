@@ -51,6 +51,9 @@ Raven_Game::Raven_Game() :m_pSelectedBot(NULL),
                         m_pPathManager(NULL),
                         m_pGraveMarkers(NULL)
 {
+    Vector2D loot = Vector2D(60, 60);
+    m_teams.push_back(new Team(loot, "Team 1", 1));
+    m_teams.push_back(new Team(loot, "Team 2", 2));
     //load in the default map
     //LoadMap(script->GetString("StartMap"));
     LoadMap(script->GetString("Map2"));
@@ -60,6 +63,8 @@ Raven_Game::Raven_Game() :m_pSelectedBot(NULL),
     m_TrainingSet = CData();
 
     m_LancerApprentissage = false;
+
+   
 }
 //----------------------------- ctor ------------------------------------------
 //-----------------------------------------------------------------------------
@@ -70,16 +75,22 @@ Raven_Game::Raven_Game(bool havePlayer):m_pSelectedBot(NULL),
                          m_pPathManager(NULL),
                          m_pGraveMarkers(NULL)
 {
-  //load in the default map
-  LoadMap(script->GetString("StartMap"));
 
-  // chaque début d'un nouveau jeu. ré-initilisaliser le dataset d'entrainement
+    Vector2D loot = Vector2D(60, 60);
+    m_teams.push_back(new Team(loot, "Team 1", 1));
+    m_teams.push_back(new Team(loot, "Team 2", 2));
+    //load in the default map
+    LoadMap(script->GetString("StartMap"));
 
-  m_TrainingSet = CData();
+    // chaque début d'un nouveau jeu. ré-initilisaliser le dataset d'entrainement
 
-  m_LancerApprentissage = false;
+    m_TrainingSet = CData();
 
-  m_bHavePlayer = havePlayer;
+    m_LancerApprentissage = false;
+
+    m_bHavePlayer = havePlayer;
+
+
 }
 
 
@@ -224,7 +235,7 @@ void Raven_Game::Update()
 	  //de temps en temps (une fois sur 2) créer un bot apprenant, lorqu'un un bot meurt.
 	  //la fonction RandBool) rend vrai une fois sur 2.
 	  if (m_estEntraine & RandBool()) {
-		  AddBots(1, true);
+          AddBotsTeam(1);
 	  }
 
     }
@@ -404,13 +415,12 @@ void Raven_Game::AddBots(unsigned int NumBotsToAdd, bool isLearningBot)
 
 void Raven_Game::AddBotsTeam(unsigned int NumBotsToAdd)
 {
-    int currTeamId = 1;
     while (NumBotsToAdd--)
     {
         
         Raven_Bot* rb = new Raven_Bot(this, Vector2D());
-        m_teams.at(currTeamId)->Addmember(rb); 
-        rb->SetTeam(m_teams.at(currTeamId), 0); 
+        m_teams.at(g_teamIntermidiate)->Addmember(rb);
+        rb->SetTeam(m_teams.at(g_teamIntermidiate), 0);
         rb->SetBotNumber((NumBotsToAdd % 3) + 1);
 
        
@@ -420,7 +430,7 @@ void Raven_Game::AddBotsTeam(unsigned int NumBotsToAdd)
         debug_con << "Adding bot with ID " << ttos(rb->ID()) << " to team " << teams.at(currTeamId)->GetName() << "";
 #endif
         
-        currTeamId = ++currTeamId % 2;
+        g_teamIntermidiate = ++g_teamIntermidiate % 2;
     }
 }
 
@@ -443,10 +453,12 @@ void Raven_Game::AddBot(Raven_Bot* rb)
 void Raven_Game::AddPlayer()
 {
     Player* player = new Player(this, Vector2D());
-    m_teams.at(0)->Addmember(player);
+    m_teams.at(g_teamIntermidiate)->Addmember(player);
+    player->SetTeam(m_teams.at(0), 0);
     m_Bots.push_back(player);
     m_Player = player;
     EntityMgr->RegisterEntity(player);
+    g_teamIntermidiate = ++g_teamIntermidiate % 2;
 }
 
 //---------------------------- NotifyAllBotsOfRemoval -------------------------
@@ -608,13 +620,6 @@ bool Raven_Game::LoadMap(const std::string& filename)
   //load the new map data
   if (m_pMap->LoadMap(filename))
   { 
-
-
-    Vector2D loot = Vector2D(60, 60);
-    m_teams.push_back(new Team(loot, "Team 1"));
-    m_teams.push_back(new Team(loot, "Team 2"));
-
-
     AddSpawnPointsTeams();
     AddBotsTeam(script->GetInt("NumBots"));
     //AddBots(script->GetInt("NumBots"), false);
