@@ -207,7 +207,7 @@ void Raven_Game::Update()
     //an unoccupied spawn point
     if ((*curBot)->isSpawning() && bSpawnPossible)
     {
-      bSpawnPossible = AttemptToAddBot(*curBot);
+      bSpawnPossible = AttemptToAddBotTeam(*curBot);
     }
     
     //if this bot's status is 'dead' add a grave at its current location 
@@ -326,6 +326,48 @@ bool Raven_Game::AttemptToAddBot(Raven_Bot* pBot)
   return false;
 }
 
+bool Raven_Game::AttemptToAddBotTeam(Raven_Bot* pBot)
+{
+    if (m_pMap->GetSpawnPoints().size() <= 0)
+    {
+        ErrorBox("Map has no spawn points!"); return false;
+    }
+
+    //we'll make the same number of attempts to spawn a bot this update as
+    //there are spawn points
+    int attempts = m_pMap->GetSpawnPoints().size();
+
+    while (--attempts >= 0)
+    {
+        
+        Vector2D pos = m_pMap->GetRandomSpawnPoint();
+
+       
+        std::list<Raven_Bot*>::const_iterator curBot = m_Bots.begin();
+
+        bool bAvailable = true;
+
+        for (curBot; curBot != m_Bots.end(); ++curBot)
+        {
+           
+            if (Vec2DDistance(pos, (*curBot)->Pos()) < (*curBot)->BRadius())
+            {
+                bAvailable = false;
+            }
+        }
+
+        if (bAvailable)
+        {
+            pBot->Spawn(pos);
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
 //-------------------------- AddBots --------------------------------------
 //
 //  Adds a bot and switches on the default steering behavior
@@ -360,6 +402,40 @@ void Raven_Game::AddBots(unsigned int NumBotsToAdd, bool isLearningBot)
 	}
 }
 
+void Raven_Game::AddBotsTeam(unsigned int NumBotsToAdd)
+{
+    int currTeamId = 1;
+    while (NumBotsToAdd--)
+    {
+        
+        Raven_Bot* rb = new Raven_Bot(this, Vector2D());
+        m_teams.at(currTeamId)->Addmember(rb); 
+        rb->SetTeam(m_teams.at(currTeamId), 0); 
+        rb->SetBotNumber((NumBotsToAdd % 3) + 1);
+
+       
+        AddBot(rb);
+
+#ifdef LOG_CREATIONAL_STUFF
+        debug_con << "Adding bot with ID " << ttos(rb->ID()) << " to team " << teams.at(currTeamId)->GetName() << "";
+#endif
+        
+        currTeamId = ++currTeamId % 2;
+    }
+}
+
+void Raven_Game::AddBot(Raven_Bot* rb)
+{
+    //switch the default steering behaviors on
+    rb->GetSteering()->WallAvoidanceOn();
+    rb->GetSteering()->SeparationOn();
+
+    m_Bots.push_back(rb);
+
+    //register the bot with the entity manager
+    EntityMgr->RegisterEntity(rb);
+}
+
 //-------------------------- AddPlayer --------------------------------------
 //
 //  Adds a player
@@ -367,7 +443,7 @@ void Raven_Game::AddBots(unsigned int NumBotsToAdd, bool isLearningBot)
 void Raven_Game::AddPlayer()
 {
     Player* player = new Player(this, Vector2D());
-    
+    m_teams.at(0)->Addmember(player);
     m_Bots.push_back(player);
     m_Player = player;
     EntityMgr->RegisterEntity(player);
@@ -532,7 +608,16 @@ bool Raven_Game::LoadMap(const std::string& filename)
   //load the new map data
   if (m_pMap->LoadMap(filename))
   { 
-    AddBots(script->GetInt("NumBots"), false);
+
+
+    Vector2D loot = Vector2D(60, 60);
+    m_teams.push_back(new Team(loot, "Team 1"));
+    m_teams.push_back(new Team(loot, "Team 2"));
+
+
+    AddSpawnPointsTeams();
+    AddBotsTeam(script->GetInt("NumBots"));
+    //AddBots(script->GetInt("NumBots"), false);
 
     if (m_bHavePlayer) {
         AddPlayer();
@@ -545,6 +630,22 @@ bool Raven_Game::LoadMap(const std::string& filename)
   return false;
 }
 
+void Raven_Game::AddSpawnPointsTeams() {
+    int NumSpawnPoints = m_pMap->GetSpawnPoints().size();
+    int currTeamId = 0;
+    while (NumSpawnPoints--)
+    {
+        //assign the current SpawnPoint to the team
+        m_teams.at(currTeamId)->AddSpawnPoint(m_pMap->GetSpawnPoints().at(NumSpawnPoints));
+
+#ifdef LOG_CREATIONAL_STUFF
+        debug_con << "Adding spawn point (" << m_pMap->GetSpawnPoints().at(NumSpawnPoints).x << "," <<
+            m_pMap->GetSpawnPoints().at(NumSpawnPoints).y << ") to team " << teams.at(currTeamId)->GetName() << "";
+#endif
+        // switch to the next team
+        currTeamId = ++currTeamId % 2;
+    }
+}
 
 //------------------------- ExorciseAnyPossessedBot ---------------------------
 //

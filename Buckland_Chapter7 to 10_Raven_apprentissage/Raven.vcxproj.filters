@@ -280,11 +280,8 @@
     <ClCompile Include="Player.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="armory\Grenade.cpp">
-      <Filter>Game\weapons &amp; projectiles\weapons</Filter>
-    </ClCompile>
-    <ClCompile Include="armory\Nade.cpp">
-      <Filter>Game\weapons &amp; projectiles\projectiles</Filter>
+    <ClCompile Include="Team.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -628,11 +625,8 @@
     <ClInclude Include="CNeuralNet.h" />
     <ClInclude Include="LearningBot.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="armory\Grenade.h">
-      <Filter>Game\weapons &amp; projectiles\weapons</Filter>
-    </ClInclude>
-    <ClInclude Include="armory\Nade.h">
-      <Filter>Game\weapons &amp; projectiles\projectiles</Filter>
+    <ClInclude Include="Team.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

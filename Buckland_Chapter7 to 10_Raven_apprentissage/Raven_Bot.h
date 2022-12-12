@@ -16,6 +16,7 @@
 #include "game/MovingEntity.h"
 #include "misc/utils.h"
 #include "Raven_TargetingSystem.h"
+#include "Team.h"
 
 
 class Raven_PathPlanner;
@@ -110,6 +111,11 @@ protected:
   //the buffer for the transformed vertices
   std::vector<Vector2D>              m_vecBotVBTrans;
 
+
+  Team* current_team;
+  int team_type;
+  int m_bNumber;
+
   //apprentissage. 
   //donnee à enregistrer décrivant une situation de comportement de l'agent 
   std::vector<double> m_vecObservation; //distance-target, visibilite, quantite-arme, type arme, son niveau de vie
@@ -165,6 +171,7 @@ public:
   void          SetSpawning(){m_Status = spawning;}
   void          SetDead(){m_Status = dead;}
   void          SetAlive(){m_Status = alive;}
+  void			SetBotNumber(int number) { m_bNumber = number; }
 
   //returns a value indicating the time in seconds it will take the bot
   //to reach the given position at its current speed.
@@ -218,6 +225,11 @@ public:
 
   std::vector<double> GetDataShoot() { return m_vecObservation; }
   std::vector<double> GetTargetShoot() { return m_vecTarget; }
+
+  std::string			GetTeamName() { return current_team->GetName(); }
+  void					SetTeam(Team* team, int type) { current_team = team; team_type = type; }
+  bool					HasTeam() { return current_team != 0; }
+  Team* const		GetTeam() { return current_team; }
   
 };
 
