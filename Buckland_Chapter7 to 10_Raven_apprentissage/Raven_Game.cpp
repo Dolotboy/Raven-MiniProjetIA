@@ -78,7 +78,7 @@ Raven_Game::Raven_Game(bool havePlayer):m_pSelectedBot(NULL),
 
   //load in the default map
   //LoadMap(script->GetString("Map1"));
-  LoadMap(script->GetString("Map1Grenade"));
+  //LoadMap(script->GetString("Map1Grenade"));
   //LoadMap(script->GetString("Map2"));
   //LoadMap(script->GetString("Map2Grenade"));
 
@@ -87,7 +87,7 @@ Raven_Game::Raven_Game(bool havePlayer):m_pSelectedBot(NULL),
     m_teams.push_back(new Team(loot, "Team 1", 1));
     m_teams.push_back(new Team(loot, "Team 2", 2));
     //load in the default map
-    LoadMap(script->GetString("StartMap"));
+    LoadMap(script->GetString("Map1Grenade"));
 
     // chaque d�but d'un nouveau jeu. r�-initilisaliser le dataset d'entrainement
 
