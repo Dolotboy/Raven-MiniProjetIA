@@ -131,7 +131,7 @@ public:
   bool LoadMap(const std::string& FileName); 
 
   void AddBots(unsigned int NumBotsToAdd, bool typeBot);
-  void AddBotsTeam(unsigned int NumBotsToAdd);
+  void AddBotsTeam(unsigned int NumBotsToAdd,bool isLearning);
   void AddBot(Raven_Bot* rb);
   void AddPlayer();
   void AddRocket(Raven_Bot* shooter, Vector2D target);

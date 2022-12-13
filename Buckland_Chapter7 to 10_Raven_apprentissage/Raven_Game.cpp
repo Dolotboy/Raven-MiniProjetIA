@@ -242,7 +242,7 @@ void Raven_Game::Update()
 	  //de temps en temps (une fois sur 2) cr�er un bot apprenant, lorqu'un un bot meurt.
 	  //la fonction RandBool) rend vrai une fois sur 2.
 	  if (m_estEntraine & RandBool()) {
-          AddBotsTeam(1);
+          AddBotsTeam(1,true);
 	  }
 
     }
@@ -420,12 +420,18 @@ void Raven_Game::AddBots(unsigned int NumBotsToAdd, bool isLearningBot)
 	}
 }
 
-void Raven_Game::AddBotsTeam(unsigned int NumBotsToAdd)
+void Raven_Game::AddBotsTeam(unsigned int NumBotsToAdd,bool isLearning = false)
 {
     while (NumBotsToAdd--)
     {
-        
-        Raven_Bot* rb = new Raven_Bot(this, Vector2D());
+        Raven_Bot* rb = nullptr;
+        if (isLearning) {
+            rb = new LearningBot(this, Vector2D());
+            debug_con << "Instanciation d'un bot apprenant" << rb->ID() << "";
+        }  
+        else
+            rb = new Raven_Bot(this, Vector2D());
+
         m_teams.at(g_teamIntermidiate)->Addmember(rb);
         rb->SetTeam(m_teams.at(g_teamIntermidiate), 0);
         rb->SetBotNumber((NumBotsToAdd % 3) + 1);

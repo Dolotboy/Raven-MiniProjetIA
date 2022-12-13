@@ -35,3 +35,6 @@ Raven_goal_Types.cpp
 Goal_Think.cpp
 FleeGoal_Evaluator.cpp
 FleeGoal_Evaluator.h
+
+Rocket Launcher Fuzzy Rules: +5 pts
+in Weapon/Weapon_RocketLauncher.cpp
