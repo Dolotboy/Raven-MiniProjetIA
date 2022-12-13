@@ -310,6 +310,20 @@ bool Raven_Bot::HandleMessage(const Telegram& msg)
       return true;
   }
 
+  case Msg_ProtectLeader:
+  {
+      Raven_Bot* leader = current_team->GetTeamLeader();
+      isProtectingLeader != isProtectingLeader;
+      if (isProtectingLeader)
+      {
+          m_pSteering->OffSetPursuitOn(leader);
+      }
+      else
+      {
+          m_pSteering->OffSetPursuitOff();
+      }
+  }
+
   case Msg_TargetKilled: {
       m_pTargSys->ClearTarget(); //clear target
       isTargeted = false;
@@ -393,6 +407,8 @@ void Raven_Bot::TakePossession()
   if ( !(isSpawning() || isDead()))
   {
     m_bPossessed = true;
+    Team* team;
+    team->SetTeamLeader(this);
 
     debug_con << "Player Possesses bot " << this->ID() << "";
   }

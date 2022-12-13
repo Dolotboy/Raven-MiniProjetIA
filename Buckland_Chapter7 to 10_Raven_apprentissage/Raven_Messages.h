@@ -22,6 +22,7 @@ enum message_type
   Msg_GunshotSound,
   Msg_UserHasRemovedBot,
   Msg_UpdatingTarget,
+  Msg_ProtectLeader,
   Msg_TargetKilled
 };
 
@@ -64,6 +65,9 @@ inline std::string MessageToString(int msg)
 
   case Msg_UpdatingTarget:
       return "Msg_UpdatingTarget";
+
+  case Msg_ProtectLeader:
+      return "Msg_ProtectLeader";
 
   case Msg_TargetKilled:
       return "Msg_TargetKilled";

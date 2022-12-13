@@ -196,6 +196,14 @@ Vector2D Raven_Steering::CalculatePrioritized()
     if (!AccumulateForce(m_vSteeringForce, force)) return m_vSteeringForce;
   }
 
+  if (On(offset_pursuit))
+  {
+
+      force = OffSetPursuit(Vector2D(0.1f, 0.1f));
+
+      if (!AccumulateForce(m_vSteeringForce, force)) return m_vSteeringForce;
+  }
+
 
   return m_vSteeringForce;
 }
@@ -401,6 +409,27 @@ Vector2D Raven_Steering::Separation(const std::list<Raven_Bot*>& neighbors)
   }
 
   return SteeringForce;
+}
+
+Vector2D Raven_Steering::OffSetPursuit(const Vector2D offset)
+{
+    Raven_Bot* leader = m_leader;
+    //calculate the offset's position in world space
+    Vector2D WorldOffsetPos = PointToWorldSpace(offset,
+        leader->Heading(),
+        leader->Side(),
+        leader->Pos());
+
+    Vector2D ToOffset = WorldOffsetPos - leader->Pos();
+
+    //the lookahead time is propotional to the distance between the leader
+    //and the pursuer; and is inversely proportional to the sum of both
+    //agent's velocities
+    double LookAheadTime = ToOffset.Length() /
+        (leader->MaxSpeed() + leader->Speed());
+
+    //now Arrive at the predicted future position of the offset
+    return Arrive(WorldOffsetPos + leader->Velocity() * LookAheadTime, fast);
 }
 
 

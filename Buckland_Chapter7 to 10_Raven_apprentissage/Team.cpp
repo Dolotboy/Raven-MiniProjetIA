@@ -32,6 +32,23 @@ void Team::UpdateNewTarget(Raven_Bot* new_target, int id_sender) {
 	}
 }
 
+void Team::ProtectLeader(int id_sender)
+{
+	std::list<Raven_Bot*>::iterator curBot = members.begin();
+	Raven_Bot* leader = *curBot;
+	for (curBot; curBot != members.end(); ++curBot) { //dispatch message to all members
+		Raven_Bot* bot_courant = *curBot;
+		if (!bot_courant->isPossessed())
+		{
+			Dispatcher->DispatchMsg(SEND_MSG_IMMEDIATELY,
+				id_sender,
+				bot_courant->ID(),
+				Msg_ProtectLeader,
+				NO_ADDITIONAL_INFO);
+		}
+	}
+}
+
 void Team::ClearTarget(int id_sender) {
 	target = 0;
 	std::list<Raven_Bot*>::iterator curBot = members.begin();

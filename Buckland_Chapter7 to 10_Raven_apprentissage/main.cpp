@@ -179,6 +179,10 @@ LRESULT CALLBACK WindowProc (HWND   hwnd,
              }
              
              break;
+         case 'Y':
+             g_pRaven->GetPlayer()->GetTeam()->SetTeamLeader(g_pRaven->GetSelectedBot());
+             g_pRaven->GetPlayer()->GetTeam()->ProtectLeader(g_pRaven->GetPlayer()->ID());
+                 break;
 
 
          case VK_UP:
