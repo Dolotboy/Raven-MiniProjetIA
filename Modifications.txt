@@ -36,5 +36,19 @@ Goal_Think.cpp
 FleeGoal_Evaluator.cpp
 FleeGoal_Evaluator.h
 
-Rocket Launcher Fuzzy Rules: +5 pts
-in Weapon/Weapon_RocketLauncher.cpp
+Rocket Launcher Fuzzy Rules: +5 PTS
+Weapon_RocketLauncher.cpp
+
+Stratégie de comportement au sein d’une équipe +10 PTS 
+(Main.cpp, on appuie sur Y, ça set le team leader du joueur actuel au joueur actuel de Team.cpp, ensuite on appel ProtectLeader de Team.cpp, cette fonction loop sur tous les
+bots de l'équipe (Excepté le leader) et leur envoie un message "Msg_ProtectLeader". Dans Raven_Bot.cpp on réagis à ce message en appelant OffSetPursuitOn de 
+SteeringBehaviour.cpp en lui envoyant le leader)
+Raven_Messages.h
+Team.h
+Team.cpp
+main.cpp
+Raven_SteeringBehaviors.cpp
+Raven_SteeringBehaviors.h
+Raven_bot.h
+Raven_bot.cpp
+main.cpp

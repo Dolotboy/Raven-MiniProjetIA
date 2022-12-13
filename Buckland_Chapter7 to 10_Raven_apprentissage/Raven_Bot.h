@@ -141,6 +141,8 @@ public:
 
   bool isTargeted = false;
 
+  bool isProtectingLeader = true;
+
   //the usual suspects
   void         Render();
   virtual void         Update();

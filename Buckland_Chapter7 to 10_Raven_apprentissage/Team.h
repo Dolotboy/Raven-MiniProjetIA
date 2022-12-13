@@ -33,6 +33,7 @@ public:
 
 	void		Addmember(Raven_Bot* new_memeber);
 	Raven_Bot*	GetTeamLeader() { return team_leader; }
+	void		SetTeamLeader(Raven_Bot* teamLeader) { team_leader = teamLeader; }
 
 	void		AddSpawnPoint(Vector2D spawnPoint);
 	const std::vector<Vector2D>& GetSpawnPoints()const { return m_SpawnPoints; }
@@ -40,6 +41,7 @@ public:
 	Vector2D    GetLootingLocation() { return lootingLocation; }
 
 	void		UpdateNewTarget(Raven_Bot* bot, int id_sender);
+	void		ProtectLeader(int id_sender);
 	Raven_Bot*	GetTarget() { return target; }
 	void		ClearTarget(int id_sender);
 
