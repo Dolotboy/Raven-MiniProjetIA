@@ -170,9 +170,14 @@ LRESULT CALLBACK WindowProc (HWND   hwnd,
            break;
 
          case 'T':
-
-             g_pRaven->GetPlayer()->GetTeam()->UpdateNewTarget(g_pRaven->GetSelectedBot(), g_pRaven->GetPlayer()->ID());
-             g_pRaven->GetSelectedBot()->isTargeted = true;
+             if (g_pRaven->GetSelectedBot()->isTargeted) {
+                 g_pRaven->GetSelectedBot()->isTargeted = false;
+             }
+             else {
+                 g_pRaven->GetPlayer()->GetTeam()->UpdateNewTarget(g_pRaven->GetSelectedBot(), g_pRaven->GetPlayer()->ID());
+                 g_pRaven->GetSelectedBot()->isTargeted = true;
+             }
+             
              break;
 
 

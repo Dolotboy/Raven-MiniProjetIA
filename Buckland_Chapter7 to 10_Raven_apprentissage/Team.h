@@ -33,7 +33,6 @@ public:
 
 	void		Addmember(Raven_Bot* new_memeber);
 	Raven_Bot*	GetTeamLeader() { return team_leader; }
-	void		AddTeamLeader(Raven_Bot* leader) { team_leader = leader; }
 
 	void		AddSpawnPoint(Vector2D spawnPoint);
 	const std::vector<Vector2D>& GetSpawnPoints()const { return m_SpawnPoints; }

@@ -27,12 +27,12 @@ void Goal_AttackTarget::Activate()
 
      return;
   }
-
+  /*
   if (m_pOwner->GetTargetSys()->isTeammate()) {
       m_iStatus = completed;
 
       return;
-  }
+  }*/
 
   //if the bot is able to shoot the target (there is LOS between bot and
   //target), then select a tactic to follow while shooting
