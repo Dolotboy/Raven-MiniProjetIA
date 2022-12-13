@@ -9,6 +9,10 @@ Pour changer d'arme lorsqu'un joueur contrôle un bot, il suiffit de ramsser l'a
 Pour ajouter un bot, il faut appuyer sur KEY_UP et en enlever un, appuyer sur KEY_DOWN
 
 Si on veut ne plus en avoir le contrôle, on doit faire clic droit sur un autre personnage ou bien appuyer sur 'X'
-Pour prendre le contrôle d'un autre personnage, il n'y a qu'à faire clic droit
+Pour prendre le contrôle d'un autre personnage, il n'y a qu'à faire clic droit.
+
+En cas de danger pour votre personnage, appuyez sur 'Y' pour que tous les membres de votre équipe accourent vous protéger
+
+Pour désigner une cible à votre équipe il suffit de cliquer sur la cible puis de cliquer sur 'T', la cible deviendra orange
 
 Pour mettre le jeu sur pause, il suffit de cliquer sur 'P'
